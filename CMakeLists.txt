@@ -5,7 +5,7 @@ if(CCACHE_PROGRAM)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
 endif()
 
-project(PortyServer)
+project(PersonalWebsite)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -19,8 +19,8 @@ if (MINGW)
     set(PLATFORM_DEFINITIONS _WIN32_WINDOWS=0x0601)
 endif()
 
-add_executable(PortyServer Server.cpp)
-# YES, SSL support too because FUCK YOU
-target_link_libraries(PortyServer PRIVATE ${PLATFORM_LIBS} argparse::argparse OpenSSL::SSL OpenSSL::Crypto Boost::boost)
-target_compile_definitions(PortyServer PRIVATE ${PLATFORM_DEFINITIONS})
-target_include_directories(PortyServer PRIVATE include)
+add_executable(PersonalWebsite Server.cpp)
+
+target_link_libraries(PersonalWebsite PRIVATE ${PLATFORM_LIBS} argparse::argparse OpenSSL::SSL OpenSSL::Crypto Boost::boost)
+target_compile_definitions(PersonalWebsite PRIVATE ${PLATFORM_DEFINITIONS})
+target_include_directories(PersonalWebsite PRIVATE include)
