@@ -16,14 +16,16 @@ namespace ResponseFactory
 
 namespace
 {
-const std::map<std::wstring_view, std::string_view> mime_map{
-		{{L"mp4", "video/mp4"},
-		 {L"webm", "video/webm"},
-		 {L"png", "image/png"},
-		 {L"jpeg", "image/jpeg"},
-		 {L"jpg", "image/jpg"},
-		 {L"html", "image/jpg"},
-		 {L"ico", "image/x-icon"}}
+
+
+const std::map<std::filesystem::path, std::string_view> mime_map{
+		{{"mp4", "video/mp4"},
+		 {"webm", "video/webm"},
+		 {"png", "image/png"},
+		 {"jpeg", "image/jpeg"},
+		 {"jpg", "image/jpg"},
+		 {"html", "image/jpg"},
+		 {"ico", "image/x-icon"}}
 };
 }
 
@@ -50,7 +52,7 @@ auto handle_get(const std::filesystem::path& path)
 
 	response->body() = std::move(data);
 
-	if (auto itr = mime_map.find(path.extension().c_str()); itr != mime_map.end())
+	if (auto itr = mime_map.find(path.extension()); itr != mime_map.end())
 		response->set("Content-Type", itr->second.data());
 
 	else
@@ -60,5 +62,4 @@ auto handle_get(const std::filesystem::path& path)
 	return response;
 }
 
-
-}
+} // end of namespace ResponseFactory
